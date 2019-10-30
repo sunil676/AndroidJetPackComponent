@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.sunil.androidjetpackcomponent.R
+import com.sunil.androidjetpackcomponent.model.Movie
 import com.sunil.androidjetpackcomponent.viewmodel.HomeViewModel
 import kotlinx.android.synthetic.main.fragment_home.view.*
 
@@ -32,14 +32,23 @@ class HomeFragment : Fragment() {
 
         val itemViewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
 
+        //observe page list
         itemViewModel.moviePageList.observe(this, Observer {
             adapter.submitList(it)
         })
 
         rootView.recyclerView.adapter = adapter
+        adapter.onItemClick = { movie -> navigateToDetail(movie.id.toString()) }
         //rootView.recyclerView.addItemDecoration(RecyclerView.ItemDecoration(requireActivity(), 3))
 
         return rootView
+    }
+
+    fun navigateToDetail(movieID: String) {
+        val navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
+        val homeFragmentDirections =
+            HomeFragmentDirections.actionHomeFragmentToDetailFragment(movieID)
+        navController.navigate(homeFragmentDirections)
     }
 
 }

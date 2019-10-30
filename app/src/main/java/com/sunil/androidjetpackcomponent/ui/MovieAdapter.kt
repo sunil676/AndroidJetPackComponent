@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.item_movie.view.*
 
 class MovieAdapter : PagedListAdapter<Movie, MovieAdapter.MovieViewHolder>(MOVIE_COMPARATOR) {
 
+    var onItemClick: ((Movie) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_movie, parent, false)
@@ -28,7 +29,7 @@ class MovieAdapter : PagedListAdapter<Movie, MovieAdapter.MovieViewHolder>(MOVIE
     }
 
 
-    class MovieViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
+    inner class MovieViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
 
         fun setData(movie: Movie) {
             view.text_title.text = movie.title
@@ -38,7 +39,12 @@ class MovieAdapter : PagedListAdapter<Movie, MovieAdapter.MovieViewHolder>(MOVIE
                 .centerCrop()
                 .into(view.image_movie_poster)
 
+            view.image_movie_poster.setOnClickListener {
+                onItemClick?.invoke(movie)
+            }
         }
+
+
     }
 
     companion object {

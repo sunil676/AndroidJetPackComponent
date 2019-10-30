@@ -1,5 +1,8 @@
 package com.sunil.androidjetpackcomponent.api
 
+import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.paging.PageKeyedDataSource
 import com.sunil.androidjetpackcomponent.model.Movie
 import com.sunil.androidjetpackcomponent.model.MoviesResponse
@@ -84,6 +87,7 @@ class MovieDataSource : PageKeyedDataSource<Int, Movie>() {
             }
 
             override fun onFailure(call: Call<MoviesResponse>, t: Throwable) {
+                Log.e("", t.localizedMessage)
             }
         })
     }

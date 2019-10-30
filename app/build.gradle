@@ -6,6 +6,8 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 
+apply plugin: 'androidx.navigation.safeargs'
+
 
 android {
     compileSdkVersion 29
@@ -30,6 +32,12 @@ android {
             buildConfigField 'String', 'API_KEY', '"c9a058c168b2ee5563bada0f30c7b0e8"'
         }
     }
+    compileOptions {
+        targetCompatibility = 1.8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
 
 dependencies {
@@ -44,7 +52,7 @@ dependencies {
 
     //glide image loader
     implementation 'com.github.bumptech.glide:glide:4.10.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
+
     // Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
@@ -60,6 +68,16 @@ dependencies {
     // Paging
     implementation "androidx.paging:paging-runtime-ktx:2.1.0"
 
-    implementation "android.arch.navigation:navigation-fragment:1.0.0"
-    implementation "android.arch.navigation:navigation-ui:1.0.0"
+    // work manager
+    implementation "android.arch.work:work-runtime-ktx:1.0.1"
+
+    // Circle ImageView
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
+
+    // TextDrawable
+    implementation 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
+
+    // navigation ktx
+    implementation "androidx.navigation:navigation-ui-ktx:2.1.0"
+    implementation "androidx.navigation:navigation-fragment-ktx:2.1.0"
 }

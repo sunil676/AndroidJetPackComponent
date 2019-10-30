@@ -4,5 +4,5 @@
 	<item
 		android:id="@+id/cart_destination"
 		android:title="Cart"
-		app:showAsAction="ifRoom" />
+		app:showAsAction="never" />
 </menu>
