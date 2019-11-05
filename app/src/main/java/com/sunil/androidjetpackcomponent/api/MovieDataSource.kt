@@ -1,8 +1,6 @@
 package com.sunil.androidjetpackcomponent.api
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.paging.PageKeyedDataSource
 import com.sunil.androidjetpackcomponent.model.Movie
 import com.sunil.androidjetpackcomponent.model.MoviesResponse
@@ -12,12 +10,18 @@ import retrofit2.Response
 
 class MovieDataSource : PageKeyedDataSource<Int, Movie>() {
 
-    override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, Movie>) {
+    override fun loadInitial(
+        params: LoadInitialParams<Int>,
+        callback: LoadInitialCallback<Int, Movie>
+    ) {
         val service = ApiClient.buildService(MovieService::class.java)
         val call = service.getPopularMovies(FIRST_PAGE)
-        call.enqueue(object : Callback<MoviesResponse>{
+        call.enqueue(object : Callback<MoviesResponse> {
 
-            override fun onResponse(call: Call<MoviesResponse>, response: Response<MoviesResponse>) {
+            override fun onResponse(
+                call: Call<MoviesResponse>,
+                response: Response<MoviesResponse>
+            ) {
 
                 if (response.isSuccessful) {
 
@@ -43,14 +47,18 @@ class MovieDataSource : PageKeyedDataSource<Int, Movie>() {
 
         call.enqueue(object : Callback<MoviesResponse> {
 
-            override fun onResponse(call: Call<MoviesResponse>, response: Response<MoviesResponse>) {
+            override fun onResponse(
+                call: Call<MoviesResponse>,
+                response: Response<MoviesResponse>
+            ) {
 
                 if (response.isSuccessful) {
 
                     val apiResponse = response.body()!!
                     val responseItems = apiResponse.movies
 
-                    val key = if (apiResponse.totalPages > params.key) params.key + 1 else apiResponse.totalPages
+                    val key =
+                        if (apiResponse.totalPages > params.key) params.key + 1 else apiResponse.totalPages
 
                     responseItems?.let {
                         callback.onResult(responseItems, key)
@@ -71,7 +79,10 @@ class MovieDataSource : PageKeyedDataSource<Int, Movie>() {
 
         call.enqueue(object : Callback<MoviesResponse> {
 
-            override fun onResponse(call: Call<MoviesResponse>, response: Response<MoviesResponse>) {
+            override fun onResponse(
+                call: Call<MoviesResponse>,
+                response: Response<MoviesResponse>
+            ) {
 
                 if (response.isSuccessful) {
 

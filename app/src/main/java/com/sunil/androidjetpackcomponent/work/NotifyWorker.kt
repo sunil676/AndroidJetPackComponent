@@ -19,7 +19,7 @@ class NotifyWorker(context: Context, workParamters: WorkerParameters) :
         val taskData = inputData
         val taskDataString = taskData.getString(WorkerActivity.MESSAGE_STATUS)
 
-        showNotification("Work Manager", taskDataString ?: "Message Sent")
+        showNotification("Work Manager", taskDataString.toString())
 
         val outputData = Data.Builder().putString(WORK_RESULT, "Task Finished").build()
 

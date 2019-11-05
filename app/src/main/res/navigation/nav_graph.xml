@@ -20,7 +20,7 @@
 	<fragment
 		android:id="@+id/shop_destination"
 		android:name="com.sunil.androidjetpackcomponent.ui.FavoriteFragment"
-		android:label="Shop"
+		android:label="Favorite"
 		tools:layout="@layout/fragment_shop">
 		<action
 			android:id="@+id/next_action"
